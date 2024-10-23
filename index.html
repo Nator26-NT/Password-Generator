@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style src="style.css">
+ body{
+  background: #FAFAD2;
+}
+#container {
+  position: fixed;
+  left: 34%;
+  background-color:#000000;
+  color: #000000;
+  width:35%;
+  height:250px;
+}
+h1{
+  background-color:#FAFAD2;
+}
+input{
+  position: relative;
+  left: 74px;
+  bottom:-44px;
+  width: 270px;
+  height:40px;
+  background-color: white;
+  font-size: 20px;
+}
+img {
+  background-color: ;
+  width: 20px;
+  position: relative;
+  left: 10%;
+  bottom: -50px;
+  
+}
+button{
+  position: relative;
+  bottom: -70px;
+  right: -120px;
+  width: 185px;
+  height:30px;
+  background-color: #FAFAD2;
+}
+
+</style>
+</head>
+<body>
+  <script src="script.js">
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordBox = document.getElementById("password");
+    const length = 12; // Fixed typo: 'lenght' to 'length'
+
+    const UpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const LowerCase = "abcdefghijklmnopqrstuvwxyz"; // Corrected typo
+    const Number = "0123456789";
+    const Symbol = "~!@#$%^&*()_+{}|:<>,.";
+    const AllChar = UpperCase + LowerCase + Number + Symbol;
+
+    function CreatePassword(){
+        let password = "";
+        password += UpperCase[Math.floor(Math.random() * UpperCase.length)];
+        password += LowerCase[Math.floor(Math.random() * LowerCase.length)];
+        password += Number[Math.floor(Math.random() * Number.length)];
+        password += Symbol[Math.floor(Math.random() * Symbol.length)];
+        console.log(passwordBox);
+
+        while (length > password.length) {
+            password += AllChar[Math.floor(Math.random() * AllChar.length)];
+        }
+
+        passwordBox.value = password;
+    }
+
+    function Copy() {
+        passwordBox.select();
+        document.execCommand("copy");
+    }
+
+    // Expose the functions to the global scope
+    window.CreatePassword = CreatePassword;
+    window.Copy = Copy;
+});
+
+
+
+  </script>
+  <div id="container">
+    <h1>Random Password Generator</h1>
+    <input type="text" id="password" readonly>
+    <img src="https://icon-library.com/images/files-document-copy-file-data-content-paper-512_49384.png" placeholder="image" onclick="Copy()">
+    <button onclick="CreatePassword()">Generate Password</button>
+    
+  </div>
+  
+</body>
+</html>
